@@ -1,6 +1,7 @@
 package com.example.root.helloagain;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -147,7 +149,7 @@ public class MainActivity extends Activity implements LocationListener {
                 @Override
                 public void onInfoWindowClick(Marker marker) {
 
-                    Toast.makeText(MainActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
                     /*RelativeLayout markerDetails = (RelativeLayout) findViewById(R.id.rl_marker_details);
                     markerDetails.setBackgroundColor(Color.BLACK);
                     markerDetails.setVisibility(View.VISIBLE);
@@ -162,6 +164,48 @@ public class MainActivity extends Activity implements LocationListener {
                     }
 
                     markerDetails.setVisibility(View.GONE);*/
+
+
+                    // custom dialog
+                    final Dialog dialog = new Dialog(MainActivity.this);
+                    dialog.setContentView(R.layout.profile_layout);
+                    dialog.setTitle(marker.getTitle());
+
+                    // set the custom dialog components - text, image and button
+/*
+                    TextView text = (TextView) dialog.findViewById(R.id.text);
+                    text.setText("Android custom dialog example! Android custom dialog example! " +
+                            "Android custom dialog example! Android custom dialog example! Android custom dialog example!" +
+                            "Android custom dialog example! Android custom dialog example! Android custom dialog example!" +
+                            "Android custom dialog example! Android custom dialog example! Android custom dialog example!");
+                    ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                    image.setImageResource(R.drawable.icon);
+*/
+
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    Button cancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+                    // if button is clicked, close the custom dialog
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MainActivity.this, "We will call you shortly", Toast.LENGTH_SHORT).show();
+
+                            dialog.dismiss();
+
+
+                        }
+                    });
+
+                    dialog.show();
+
                 }
             });
 
