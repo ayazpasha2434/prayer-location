@@ -41,13 +41,31 @@ public class ApiHandler {
 
         String latitudeLongitude = latLng.latitude + "," + latLng.longitude;
 
-        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+
-            latitudeLongitude +"&radius=2000&types=mosque&key=AIzaSyAgcEbfxnb9bnb9MK90g7eC-fdNcJoClEk";
+        /*String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+
+            latitudeLongitude +"&radius=2000&types=mosque&key=AIzaSyAgcEbfxnb9bnb9MK90g7eC-fdNcJoClEk";*/
+
+        String url = "http://nodejsforwork.com/get_nearest_babysitters/?latitude=12.9817&longitude=77.6117";
 
         Log.d(TAG, "URL = "+url);
 
         AppController.getInstance().addToRequestQueue(
                 new VolleyRequest(listener, url,VOLLEY_ABOUT_TAG)
+                        .setRetryPolicy(defaultRetryPolicy), VOLLEY_ABOUT_TAG);
+    }
+
+    public void getBabySitters(LatLng latLng, VolleyTasksListener listener){
+
+        String latitudeLongitude = latLng.latitude + "," + latLng.longitude;
+
+        /*String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+
+            latitudeLongitude +"&radius=2000&types=mosque&key=AIzaSyAgcEbfxnb9bnb9MK90g7eC-fdNcJoClEk";*/
+
+        String url = "http://nodejsforwork.com/get_nearest_babysitters/?latitude="+latLng.latitude+"&longitude="+latLng.longitude;
+
+        Log.d(TAG, "URL = "+url);
+
+        AppController.getInstance().addToRequestQueue(
+                new VolleyArrayRequest(listener, url,VOLLEY_ABOUT_TAG)
                         .setRetryPolicy(defaultRetryPolicy), VOLLEY_ABOUT_TAG);
     }
 

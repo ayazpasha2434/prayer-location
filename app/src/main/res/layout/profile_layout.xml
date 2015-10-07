@@ -4,206 +4,218 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:src="@drawable/ic_face_black_48dp"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:id="@+id/details_1">
-
-        <ImageView
-            android:id="@+id/image_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:src="@drawable/ic_schedule_black_18dp"/>
-
-        <TextView
-            android:id="@+id/text_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8 AM to 8 PM, Available on weekends also!"
-            android:paddingLeft="10dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:id="@+id/details_2">
-
-        <ImageView
-            android:id="@+id/image_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:src="@drawable/ic_room_black_18dp"/>
-
-        <TextView
-            android:id="@+id/text_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="#73, 15th Cross, 6th Main Road, Lakkasandra, Bangalore - 560030"/>
-    </LinearLayout>
-
-    <!--<LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/details_3">
-
-        <ImageView
-            android:id="@+id/image_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:src="@drawable/ic_schedule_black_18dp"/>
-
-        <TextView
-            android:id="@+id/text_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Android custom dialog example! Android custom dialog example! Android custom dialog example! Android custom dialog example! Android custom dialog example!"/>
-    </LinearLayout>-->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:id="@+id/details_4">
-
-        <ImageView
-            android:id="@+id/image_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:src="@drawable/ic_verified_user_black_18dp"/>
-
-        <TextView
-            android:id="@+id/text_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="Verified baby sitter, have served 500+ baby sits"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:id="@+id/details_5">
-
-        <ImageView
-            android:id="@+id/image_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:src="@drawable/ic_thumb_up_black_18dp"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_5"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Very kind and helpful"/>
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/individual"/>
 
-            <TextView
-                android:id="@+id/sub_text_5"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:text=" -- Ayaz Pasha"/>
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:id="@+id/details_1">
 
-            <TextView
-                android:id="@+id/text_6"
+                <ImageView
+                    android:id="@+id/image_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:src="@drawable/ic_schedule_black_18dp"/>
+
+                <TextView
+                    android:id="@+id/text_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8 AM to 8 PM, Available on weekends also!"
+                    android:paddingLeft="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Will prefer always, knows kids well"/>
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:id="@+id/details_2">
 
-            <TextView
-                android:id="@+id/sub_text_6"
+                <ImageView
+                    android:id="@+id/image_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:src="@drawable/ic_room_black_18dp"/>
+
+                <TextView
+                    android:id="@+id/text_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="#73, 15th Cross, 6th Main Road, Lakkasandra, Bangalore - 560030"/>
+            </LinearLayout>
+
+            <!--<LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:text=" -- Ajay Malhotra"/>
+                android:orientation="horizontal"
+                android:id="@+id/details_3">
+
+                <ImageView
+                    android:id="@+id/image_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:src="@drawable/ic_schedule_black_18dp"/>
+
+                <TextView
+                    android:id="@+id/text_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Android custom dialog example! Android custom dialog example! Android custom dialog example! Android custom dialog example! Android custom dialog example!"/>
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:id="@+id/details_4">
+
+                <ImageView
+                    android:id="@+id/image_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:src="@drawable/ic_verified_user_black_18dp"/>
+
+                <TextView
+                    android:id="@+id/text_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="Verified baby sitter, have served 500+ baby sits"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:id="@+id/details_5">
+
+                <ImageView
+                    android:id="@+id/image_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:src="@drawable/ic_thumb_up_black_18dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/text_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="Very kind and helpful"/>
+
+                    <TextView
+                        android:id="@+id/sub_text_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="italic"
+                        android:text=" -- Ayaz Pasha"/>
+
+                    <TextView
+                        android:id="@+id/text_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="Will prefer always, knows kids well"/>
+
+                    <TextView
+                        android:id="@+id/sub_text_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="italic"
+                        android:text=" -- Ajay Malhotra"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="right">
+
+                <!--<Button
+                    android:id="@+id/dialogButtonOK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_below="@+id/image" />
+
+                <Button
+                    android:id="@+id/dialogButtonCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_below="@+id/image" />-->
+
+                <!--<ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_arrow_back_black_48dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_call_black_48dp"/>-->
+
+                <Button
+                    android:id="@+id/dialogButtonOK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BACK"
+                    style="?android:attr/borderlessButtonStyle" />
+
+                <Button
+                    android:id="@+id/dialogButtonCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CALL"
+                    style="?android:attr/borderlessButtonStyle" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right">
-
-        <!--<Button
-            android:id="@+id/dialogButtonOK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_below="@+id/image" />
-
-        <Button
-            android:id="@+id/dialogButtonCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Call"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_below="@+id/image" />-->
-
-        <!--<ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@drawable/ic_arrow_back_black_48dp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@drawable/ic_call_black_48dp"/>-->
-
-        <Button
-            android:id="@+id/dialogButtonOK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BACK"
-            style="?android:attr/borderlessButtonStyle" />
-
-        <Button
-            android:id="@+id/dialogButtonCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CALL"
-            style="?android:attr/borderlessButtonStyle" />
-
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>

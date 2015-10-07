@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
@@ -12,15 +13,18 @@ import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.root.helloagain.model.BabySitter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,14 +41,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 
 public class MainActivity extends Activity implements LocationListener {
-
-    static final LatLng MyLatLng1 = new LatLng(12.954563, 77.639840);
-    static final LatLng MyLatLng2 = new LatLng(12.946784, 77.653272);
-    static final LatLng MyLatLng3 = new LatLng(12.944651, 77.642114);
-    static final LatLng MyLatLng4 = new LatLng(12.956236, 77.651041);
-    static final LatLng MyLatLng5 = new LatLng(12.946909, 77.638638);
 
     private static final long LOCATION_REFRESH_TIME = 0;
     private static final long LOCATION_REFRESH_DISTANCE = 1000;
@@ -54,6 +56,9 @@ public class MainActivity extends Activity implements LocationListener {
 
     private GoogleMap googleMap;
     private ApiHandler mApiHandler = null;
+
+    private Map<String, BabySitter> babySitters;
+    BabySitter babySitter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,8 @@ public class MainActivity extends Activity implements LocationListener {
         }
 
         setContentView(R.layout.activity_main);
+
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mApiHandler = new ApiHandler();
 
@@ -140,6 +147,8 @@ public class MainActivity extends Activity implements LocationListener {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
 
+                    babySitter = babySitters.get(marker.getTitle());
+
                     marker.showInfoWindow();
                     return true;
                 }
@@ -165,11 +174,15 @@ public class MainActivity extends Activity implements LocationListener {
 
                     markerDetails.setVisibility(View.GONE);*/
 
+                    marker.hideInfoWindow();
 
                     // custom dialog
                     final Dialog dialog = new Dialog(MainActivity.this);
                     dialog.setContentView(R.layout.profile_layout);
                     dialog.setTitle(marker.getTitle());
+
+                    TextView addressTV = (TextView) dialog.findViewById(R.id.text_2);
+                    addressTV.setText(babySitter.getAddress().trim());
 
                     // set the custom dialog components - text, image and button
 /*
@@ -208,6 +221,8 @@ public class MainActivity extends Activity implements LocationListener {
 
                 }
             });
+
+            googleMap.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
 
             /*googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
@@ -257,23 +272,20 @@ public class MainActivity extends Activity implements LocationListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        /*if (item.getItemId() == R.id.legal) {
+            startActivity(new Intent(this, LoginActivity.class));
 
-        return super.onOptionsItemSelected(item);
+            return(true);
+        }*/
+
+        return true;
     }
 
     /*@Override
@@ -344,11 +356,11 @@ public class MainActivity extends Activity implements LocationListener {
         //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=12.9817,77.6117&radius=2000&types=mosque&key=AIzaSyAgcEbfxnb9bnb9MK90g7eC-fdNcJoClEk&
         // pagetoken=
 
-        final ProgressDialog pDialog = new ProgressDialog(MainActivity.this);
+        /*final ProgressDialog pDialog = new ProgressDialog(MainActivity.this);
         pDialog.setMessage("Loading...");
-        pDialog.show();
+        pDialog.show();*/
 
-        mApiHandler.get_About(latLng, new VolleyTasksListener<JSONObject>() {
+        /*mApiHandler.get_About(latLng, new VolleyTasksListener<JSONObject>() {
 
             @Override
             public void handleResult(JSONObject response) {
@@ -390,6 +402,141 @@ public class MainActivity extends Activity implements LocationListener {
 
                     }
 
+                    *//*if (status.equalsIgnoreCase("success")) {
+
+                        JSONObject responsejson = response
+                                .getJSONObject("response_data");
+
+                        Log.i(Constants.TAG, "response: " + responsejson.getString("address")
+                                + responsejson.getString("phone"));
+
+                    }*//*
+                } catch (Exception e) {
+                    Log.e(Constants.TAG, "exception:" + e);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void handleError(Exception e) {
+
+                e.printStackTrace();
+            }
+        });*/
+
+        mApiHandler.getBabySitters(latLng, new VolleyTasksListener<JSONArray>() {
+
+            @Override
+            public void handleResult(JSONArray response) {
+
+                //pDialog.hide();
+
+                try {
+
+                    Log.i(Constants.TAG, "response: " + response);
+                    googleMap.clear();
+
+                    JSONArray babySitterArr = response;//.getJSONArray("results");
+
+                    if (babySitterArr != null && babySitterArr.length() != 0) {
+
+                        babySitters = new HashMap<String, BabySitter>();
+
+                        double babySitterLat = 0.0;
+                        double babySitterLon = 0.0;
+
+                        String babySitterCat = "";
+                        String babySitterAdd = "";
+
+                        String babySitterYearOfEst = "2010";
+
+                        for (int i = 0; i < babySitterArr.length(); i++) {
+
+                            JSONObject babySitterObj = babySitterArr.getJSONObject(i);
+
+                            //if (masjidObj != null && masjidObj.getJSONObject("geometry") != null) {
+
+                                String babySitterName = babySitterObj.getString("name");
+
+
+                                if(babySitterObj.has("latitude") && babySitterObj.has("longitude")) {
+
+                                    babySitterLat = babySitterObj.getDouble("latitude");
+                                    babySitterLon = babySitterObj.getDouble("longitude");
+                                }
+
+                                if(babySitterObj.has("category")) {
+
+                                    babySitterCat = babySitterObj.getString("category");
+                                }
+
+                                if(babySitterObj.has("address")) {
+
+                                    babySitterAdd = babySitterObj.getString("address");
+                                }
+
+                                if(babySitterObj.has("year_of_est")) {
+
+                                    babySitterYearOfEst = babySitterObj.getString("year_of_est");
+                                }
+
+                                if (babySitterLat != 0.0 && babySitterLon != 0.0) {
+
+                                    BabySitter babySitter = new BabySitter(babySitterName, babySitterCat,
+                                            babySitterLat, babySitterLon, babySitterAdd,
+                                            babySitterYearOfEst, babySitterObj.getDouble("distance"));
+
+                                    babySitters.put(babySitterName, babySitter);
+
+                                    int randomInt = randInt(1, 6);
+
+                                    switch(randomInt) {
+
+                                        case 1: googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.baby_sitter_1)));
+                                            break;
+
+                                        case 2: googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.baby_sitter_2)));
+                                            break;
+
+                                        case 3: googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.baby_sitter_3)));
+                                            break;
+
+                                        case 4: googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.baby_sitter_4)));
+                                            break;
+
+                                        case 5: googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.baby_sitter_5)));
+                                            break;
+
+                                        case 6:googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.baby_sitter_6)));
+                                            break;
+
+                                        default: googleMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(babySitterLat, babySitterLon)).title(babySitterName).icon(
+                                                BitmapDescriptorFactory.fromResource(R.drawable.babysitter)));
+                                            break;
+
+                                    }
+
+                                }
+
+                            //}
+
+                        }
+
+                    }
+
                     /*if (status.equalsIgnoreCase("success")) {
 
                         JSONObject responsejson = response
@@ -411,5 +558,49 @@ public class MainActivity extends Activity implements LocationListener {
                 e.printStackTrace();
             }
         });
+    }
+
+    class PopupAdapter implements GoogleMap.InfoWindowAdapter {
+        LayoutInflater inflater=null;
+
+        PopupAdapter(LayoutInflater inflater) {
+            this.inflater=inflater;
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return(null);
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            View popup=inflater.inflate(R.layout.info_window_layout, null);
+
+            TextView tv=(TextView) popup.findViewById(R.id.info_tv);
+
+            tv.setText(marker.getTitle());
+
+            /*tv=(TextView)popup.findViewById(R.id.snippet);
+            tv.setText(marker.getSnippet());*/
+
+            return(popup);
+        }
+    }
+
+    public static int randInt(int min, int max) {
+
+        // NOTE: This will (intentionally) not run as written so that folks
+        // copy-pasting have to think about how to initialize their
+        // Random instance.  Initialization of the Random instance is outside
+        // the main scope of the question, but some decent options are to have
+        // a field that is initialized once and then re-used as needed or to
+        // use ThreadLocalRandom (if using at least Java 1.7).
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
     }
 }

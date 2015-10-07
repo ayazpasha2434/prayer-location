@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="40dp" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" >
+
+            <ImageView
+                android:id="@+id/new_realm_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/individual" />
+
+            <TextView
+                android:id="@+id/new_realm_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_realm_avatar"
+                android:text="long text" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
